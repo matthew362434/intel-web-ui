@@ -17,4 +17,25 @@
 ##############################################################################
 */
 
-import "@testing-library/jest-dom";
+import { ErrorLayout } from "../error-layout";
+
+export const ErrorScreen = ({
+  errorDescription,
+}: {
+  errorDescription: string;
+}): JSX.Element => {
+  const handleOnPress = (): void => {
+    window.location.reload();
+  };
+
+  return (
+    <ErrorLayout>
+      <div>
+        An error occured...please try{" "}
+        <div onClick={handleOnPress}>refreshing</div>
+        the page
+      </div>
+      <div>Error: {errorDescription}</div>
+    </ErrorLayout>
+  );
+};

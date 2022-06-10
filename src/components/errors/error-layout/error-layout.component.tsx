@@ -17,4 +17,16 @@
 ##############################################################################
 */
 
-import "@testing-library/jest-dom";
+import { ReactNode } from "react";
+
+interface ErrorLayoutProps {
+  children: ReactNode;
+}
+
+export const ErrorLayout = ({ children }: ErrorLayoutProps): JSX.Element => {
+  return (
+    <div>
+      <div>{children}</div>
+    </div>
+  );
+};

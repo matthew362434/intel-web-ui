@@ -17,4 +17,5 @@
 ##############################################################################
 */
 
-import "@testing-library/jest-dom";
+export * from "./loading.component";
+export * from "./loading-indicator.component";

@@ -17,4 +17,18 @@
 ##############################################################################
 */
 
-import "@testing-library/jest-dom";
+import { ErrorLayout } from "../error-layout";
+
+export const Notfound = (): JSX.Element => {
+  const handleOnPress = (): void => {
+    window.location.href = window.location.href;
+  };
+
+  return (
+    <ErrorLayout>
+      <div>Resource not found</div>
+      <div>Please try refreshing the page</div>
+      <div onClick={handleOnPress}>Refresh</div>
+    </ErrorLayout>
+  );
+};

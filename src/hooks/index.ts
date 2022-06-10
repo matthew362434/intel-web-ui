@@ -17,4 +17,4 @@
 ##############################################################################
 */
 
-import "@testing-library/jest-dom";
+export { useStorage } from "./use-storage/use-storage";

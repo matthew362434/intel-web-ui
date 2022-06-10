@@ -17,4 +17,18 @@
 ##############################################################################
 */
 
-import "@testing-library/jest-dom";
+import { ErrorLayout } from "../error-layout";
+
+export const ServiceUnavailable = (): JSX.Element => {
+  const handleOnPress = (): void => {
+    window.location.reload();
+  };
+
+  return (
+    <ErrorLayout>
+      <div>Server connection lost</div>
+      <div>Please try again in a few minutes</div>
+      <div onClick={handleOnPress}>Connect</div>
+    </ErrorLayout>
+  );
+};

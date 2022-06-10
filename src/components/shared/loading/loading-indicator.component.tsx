@@ -17,4 +17,6 @@
 ##############################################################################
 */
 
-import "@testing-library/jest-dom";
+export const LoadingIndicator = (props: any): JSX.Element => {
+  return <div></div>;
+};

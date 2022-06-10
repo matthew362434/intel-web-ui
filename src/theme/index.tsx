@@ -17,4 +17,9 @@
 ##############################################################################
 */
 
-import "@testing-library/jest-dom";
+import { createGlobalStyle } from "styled-components";
+
+const StylesBase = createGlobalStyle`
+`;
+
+export default StylesBase;

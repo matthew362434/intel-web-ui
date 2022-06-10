@@ -17,4 +17,10 @@
 ##############################################################################
 */
 
-import "@testing-library/jest-dom";
+module.exports = {
+  content: [],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}

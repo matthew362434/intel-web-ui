@@ -17,4 +17,5 @@
 ##############################################################################
 */
 
-import "@testing-library/jest-dom";
+export * from "./notification.component";
+export * from "./notification-toast";

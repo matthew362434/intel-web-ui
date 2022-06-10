@@ -17,4 +17,11 @@
 ##############################################################################
 */
 
-import "@testing-library/jest-dom";
+export enum LOCAL_STORAGE_KEYS {
+  ALL = "all",
+  UPLOADS = "uploads",
+  PINNED_LABELS = "pinnedLabels",
+  UNAUTHORIZED = "unauthorized",
+  SERVICE_UNAVAILABLE = "service-unavailable",
+  EXPORTING_DATASETS = "exportingDatasets",
+}
