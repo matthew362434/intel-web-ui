@@ -17,19 +17,20 @@
 ##############################################################################
 */
 
-import { Suspense } from "react";
+import { Suspense } from 'react';
 
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import { setLogger } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
-import { Route, Routes } from "react-router-dom";
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { setLogger } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { Route, Routes } from 'react-router-dom';
 
-import { Loading } from "./shared";
-import { ROUTER_PATHS } from "../routes";
-import { useStorage } from "../hooks";
-import { ApplicationProvider } from "../providers";
+import { Loading } from './shared';
+import { ROUTER_PATHS } from '../routes';
+import { useStorage } from '../hooks';
+import { ApplicationProvider } from '../providers';
+import { LandingPage } from './landing-page';
 
 interface ResponseError {
   message: string;
@@ -43,13 +44,15 @@ const App = (): JSX.Element => {
   useStorage();
 
   setLogger({
+    // eslint-disable-next-line no-console
     log: (log: string) => console.log(log),
+    // eslint-disable-next-line no-console
     warn: (warn: string) => console.warn(warn),
     error: (error: ResponseError) => {
       if (
-        error.hasOwnProperty("message") &&
-        error.hasOwnProperty("config") &&
-        error.hasOwnProperty("response")
+        error.hasOwnProperty('message') &&
+        error.hasOwnProperty('config') &&
+        error.hasOwnProperty('response')
       ) {
         const errorLog = `Error: '${error.message}'`;
         const urlLog = `Request url: '${error.config.url}'`;
@@ -59,10 +62,12 @@ const App = (): JSX.Element => {
         const responseBody = `Response body: ${
           error.response ? JSON.stringify(error.response.data) : undefined
         }`;
+        // eslint-disable-next-line no-console
         console.error(
           `${errorLog}, ${urlLog}, ${requestBody}, ${responseBody}`
         );
       } else {
+        // eslint-disable-next-line no-console
         console.error(error);
       }
     },
@@ -77,7 +82,7 @@ const App = (): JSX.Element => {
               path={ROUTER_PATHS.PROJECT}
               element={<Suspense fallback={<Loading />}></Suspense>}
             />
-            {/* <Route path={ROUTER_PATHS.LANDING_PAGE} element={LandingPage} /> */}
+            <Route path={ROUTER_PATHS.LANDING_PAGE} element={<LandingPage />} />
           </Routes>
         </DndProvider>
       </ApplicationProvider>

@@ -17,9 +17,46 @@
 ##############################################################################
 */
 
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
+import tw, { GlobalStyles as BaseStyles } from 'twin.macro';
 
-const StylesBase = createGlobalStyle`
+const CustomStyles = createGlobalStyle`
+  html {
+    scroll-behavior: smooth;
+    &.dark {
+      color: white;
+    }
+    &.light {
+      color: black;
+    }
+  }
+
+  body {
+    ${tw`antialiased`}
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    border-radius: 6px;
+    background: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background: #0C1938;
+    box-shadow: inset 0 0 4px #fff2;
+  }
 `;
 
-export default StylesBase;
+const GlobalStyles = () => (
+  <>
+    <BaseStyles />
+    <CustomStyles />
+  </>
+);
+
+export default GlobalStyles;

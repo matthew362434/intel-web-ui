@@ -17,33 +17,39 @@
 ##############################################################################
 */
 
-import dayjs, { OptionType } from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
-import utc from "dayjs/plugin/utc.js";
-import { LOCAL_STORAGE_KEYS } from "./local-storage-keys";
+import dayjs, { OptionType } from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+import utc from 'dayjs/plugin/utc.js';
+import { LOCAL_STORAGE_KEYS } from './local-storage-keys';
+import * as yup from 'yup';
+import { ValidationError } from 'yup';
+
+export const fullNameValidator = yup
+  .string()
+  .required('Full name cannot be empty');
 
 dayjs.extend(customParseFormat);
 dayjs.extend(utc);
 
 export enum ErrorBackendMessage {
-  USER_ALREADY_EXISTS = "USER_ALREADY_EXISTS",
-  USER_NOT_FOUND = "USER_NOT_FOUND",
-  INVALID_INPUT = "INVALID_INPUT",
-  WRONG_OLD_PASSWORD = "WRONG_OLD_PASSWORD",
-  SAME_NEW_PASSWORD = "SAME_NEW_PASSWORD",
-  EMAIL_ALREADY_REGISTERED = "EMAIL_ALREADY_REGISTERED",
-  INVALID_EMAIL = "INVALID_EMAIL",
-  BAD_REQUEST = "BAD_REQUEST",
+  USER_ALREADY_EXISTS = 'USER_ALREADY_EXISTS',
+  USER_NOT_FOUND = 'USER_NOT_FOUND',
+  INVALID_INPUT = 'INVALID_INPUT',
+  WRONG_OLD_PASSWORD = 'WRONG_OLD_PASSWORD',
+  SAME_NEW_PASSWORD = 'SAME_NEW_PASSWORD',
+  EMAIL_ALREADY_REGISTERED = 'EMAIL_ALREADY_REGISTERED',
+  INVALID_EMAIL = 'INVALID_EMAIL',
+  BAD_REQUEST = 'BAD_REQUEST',
 }
 
 export enum ErrorFrontMessage {
-  USER_ALREADY_EXISTS = "This email address is already being used.",
+  USER_ALREADY_EXISTS = 'This email address is already being used.',
   USER_NOT_FOUND = "User doesn't exist.",
-  WRONG_OLD_PASSWORD = "That’s an incorrect password. Try again.",
-  SAME_NEW_PASSWORD = "Password should be different from your old password.",
-  EMAIL_ALREADY_REGISTERED = "This email address is already being used.",
-  INVALID_EMAIL = "Invalid email.",
-  BAD_REQUEST = "Your profile image cannot be greater than 300 x 300 px.",
+  WRONG_OLD_PASSWORD = 'That’s an incorrect password. Try again.',
+  SAME_NEW_PASSWORD = 'Password should be different from your old password.',
+  EMAIL_ALREADY_REGISTERED = 'This email address is already being used.',
+  INVALID_EMAIL = 'Invalid email.',
+  BAD_REQUEST = 'Your profile image cannot be greater than 300 x 300 px.',
 }
 
 export const getDefinedFromList = <T>(items: (T | undefined)[]): T[] => {
@@ -53,7 +59,6 @@ export const getDefinedFromList = <T>(items: (T | undefined)[]): T[] => {
   return items.filter(isUndefined);
 };
 
-/* eslint-disable  @typescript-eslint/no-explicit-any */
 const sort = <T, K extends keyof T>(
   list: T[],
   attribute: K,
@@ -65,7 +70,7 @@ const sort = <T, K extends keyof T>(
       let previousValue: any = previous[attribute],
         currentValue: any = current[attribute];
       let comparison: any;
-      if (typeof previous[attribute] === "string" && toLowercase) {
+      if (typeof previous[attribute] === 'string' && toLowercase) {
         previousValue = (
           previous[attribute] as unknown as string
         ).toLowerCase();
@@ -130,9 +135,9 @@ export const passwordRegex = new RegExp(
 );
 
 export const newPasswordErrorMessage =
-  "Password must consists of 8 - 200 characters, at least one capital letter, lower letter, digit or symbol.";
+  'Password must consists of 8 - 200 characters, at least one capital letter, lower letter, digit or symbol.';
 export const confirmPasswordErrorMessage =
-  "The password you entered did not match.";
+  'The password you entered did not match.';
 
 export const formatDate = (date: string, format: string): string =>
   dayjs(date).format(format);
@@ -147,34 +152,34 @@ export const formatLocalToUtc = (date: string, localFormat: string): string =>
   dayjs(date, localFormat).utc(false).local().format();
 
 export const getImageData = (img: HTMLImageElement): ImageData => {
-  const canvas = document.createElement("canvas") as HTMLCanvasElement;
+  const canvas = document.createElement('canvas') as HTMLCanvasElement;
 
   canvas.width = img.naturalWidth;
   canvas.height = img.naturalHeight;
 
-  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+  const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
 
   ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
 
   return ctx.getImageData(0, 0, img.naturalWidth, img.naturalHeight);
 };
 
-export const renderImageData = (imgData: ImageData, name = ""): void => {
+export const renderImageData = (imgData: ImageData, name = ''): void => {
   let canvasContainer: HTMLDivElement | null =
-    document.querySelector(".canvasContainer");
-  const canvas = document.createElement("canvas");
+    document.querySelector('.canvasContainer');
+  const canvas = document.createElement('canvas');
   canvas.dataset.name = name;
-  (canvas as any).style = "width: 300px;";
+  (canvas as any).style = 'width: 300px;';
 
   if (!canvasContainer) {
-    canvasContainer = document.createElement("div") as HTMLDivElement;
-    canvasContainer.classList.add("canvasContainer");
+    canvasContainer = document.createElement('div') as HTMLDivElement;
+    canvasContainer.classList.add('canvasContainer');
     document.body.appendChild(canvasContainer);
   }
 
   canvasContainer?.prepend(canvas);
 
-  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+  const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   canvas.width = imgData.width;
@@ -192,7 +197,7 @@ export const runWhen =
   };
 
 export const openNewTab = (url: string): void => {
-  window.open(url, "_blank", "noreferrer");
+  window.open(url, '_blank', 'noreferrer');
 };
 
 export const removeLocalStorageKey = (key: LOCAL_STORAGE_KEYS): void => {
@@ -207,4 +212,8 @@ export const getParsedLocalStorage = <T>(key: LOCAL_STORAGE_KEYS): T | null => {
   }
 
   return null;
+};
+
+export const isYupValidationError = (error: any): error is ValidationError => {
+  return error.name === 'ValidationError' && error.message;
 };

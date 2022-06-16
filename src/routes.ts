@@ -20,40 +20,19 @@
 const HOME = "/";
 const PROJECTS = "/projects";
 const PROJECT = `${PROJECTS}/:projectId`;
-const REGISTRATION_ROUTE_PREFIX = "/registration";
 
 const ROUTER_PATHS = {
   HOME,
   LANDING_PAGE: HOME,
-  PROFILE_PAGE: "/profile",
-  ABOUT_PAGE: "/about",
-  TEAM: "/team",
-  LOGS: "/logs",
   PROJECTS,
   PROJECT,
-  PROJECT_TESTS: `${PROJECT}/tests`,
-  PROJECT_DEPLOYMENTS: `${PROJECT}/deployments`,
-  SIGN_OUT: "/oauth2/sign_out",
-  SIGN_OUT_PAGE: "/sign_out_page",
-  REGISTER: `${REGISTRATION_ROUTE_PREFIX}/sign-up`,
-  FORGOT_PASSWORD: `${REGISTRATION_ROUTE_PREFIX}/forgot-password`,
-  RESET_PASSWORD: `${REGISTRATION_ROUTE_PREFIX}/reset-password`,
 };
 
 const getProjectUrl = (projectId: string): string =>
   encodeURI(`${PROJECTS}/${projectId}`);
-const getProjectTestsUrl = (projectId: string): string =>
-  encodeURI(`${PROJECTS}/${projectId}/tests`);
-const getProjectDeploymentsUrl = (projectId: string): string =>
-  encodeURI(`${PROJECTS}/${projectId}/deployments`);
-const getProjectLabelsUrl = (projectId: string): string =>
-  encodeURI(`${PROJECTS}/${projectId}/labels`);
 
 const PATHS = {
   getProjectUrl,
-  getProjectTestsUrl,
-  getProjectDeploymentsUrl,
-  getProjectLabelsUrl,
 };
 
 export { ROUTER_PATHS, PATHS };

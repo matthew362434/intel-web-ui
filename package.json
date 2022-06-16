@@ -3,17 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@babel/core": "^7.18.2",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.1.1",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.4.1",
-    "@types/node": "^16.11.27",
-    "@types/react": "^18.0.6",
-    "@types/react-dom": "^18.0.2",
-    "@types/styled-components": "^5.1.25",
+    "@adobe/react-spectrum": "^3.19.0",
     "axios": "^0.27.2",
-    "babel-plugin-macros": "^3.1.0",
     "dayjs": "^1.11.3",
     "http-status-codes": "^2.2.0",
     "prettier": "^2.6.2",
@@ -30,10 +21,11 @@
     "react-scripts": "^5.0.1",
     "sass": "^1.52.3",
     "styled-components": "^5.3.5",
-    "tailwindcss": "^3.1.2",
-    "twin.macro": "^2.8.2",
+    "tailwindcss": "^3.0.18",
+    "twin.macro": "2.8.1",
     "typescript": "^4.6.3",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -41,6 +33,32 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prettier:write": "prettier --write --ignore-path .gitignore \"src/**/*.{ts,tsx,test.ts}\""
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.1.1",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.4.1",
+    "@types/node": "^16.11.27",
+    "@types/react": "^18.0.12",
+    "@types/react-beautiful-dnd": "^13.1.2",
+    "@types/react-dom": "^18.0.5",
+    "@types/react-notifications-component": "^3.1.1",
+    "@types/react-router-dom": "^5.3.3",
+    "@babel/plugin-transform-react-jsx": "^7.16.7",
+    "@types/styled-components": "^5.1.22",
+    "postcss": "^8.4.6",
+    "prettier": "^2.5.1"
+  },
+  "babelMacros": {
+    "twin": {
+      "preset": "styled-components"
+    }
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true
   },
   "eslintConfig": {
     "extends": [
@@ -59,10 +77,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "babelMacros": {
-    "twin": {
-      "preset": "styled-components"
-    }
   }
 }

@@ -17,22 +17,23 @@
 ##############################################################################
 */
 
-import React, { StrictMode } from "react";
-import ReactDOM from "react-dom";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { BrowserRouter as Router } from "react-router-dom";
-import { ErrorBoundary } from "./components/errors/error-boundary.component";
-import { NotificationProvider } from "./components/shared/notification";
-import { RouteBasedApplicationServiceProvider } from "./providers/application-provider/route-based-application-service-provider.component";
-import reportWebVitals from "./report-web-vitals";
-import { ThemeProvider } from "./theme/theme-provider.component";
-import { GlobalStyles } from "twin.macro";
-import StylesBase from "./theme";
+import React, { StrictMode } from 'react';
+import ReactDOM from 'react-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { ErrorBoundary } from './components/errors/error-boundary.component';
+import { NotificationProvider } from './components/shared/notification';
+import { RouteBasedApplicationServiceProvider } from './providers/application-provider/route-based-application-service-provider.component';
+import reportWebVitals from './report-web-vitals';
+import { ThemeProvider } from './theme/theme-provider.component';
+import { Provider, darkTheme } from '@adobe/react-spectrum';
+import GlobalStyles from './theme';
+import 'twin.macro';
 
 function importBuildTarget(): Promise<
-  typeof import("./components/app.component")
+  typeof import('./components/app.component')
 > {
-  return import("./components/app.component");
+  return import('./components/app.component');
 }
 
 const queryClient = new QueryClient({
@@ -45,27 +46,29 @@ const queryClient = new QueryClient({
 });
 
 importBuildTarget().then(({ default: App }) =>
+  // eslint-disable-next-line react/no-render-return-value
   ReactDOM.render(
     <div>
       <GlobalStyles />
-      <StylesBase />
       <ErrorBoundary>
         <StrictMode>
           <Router>
-            <ThemeProvider>
-              <RouteBasedApplicationServiceProvider>
-                <NotificationProvider>
-                  <QueryClientProvider client={queryClient}>
-                    <App />
-                  </QueryClientProvider>
-                </NotificationProvider>
-              </RouteBasedApplicationServiceProvider>
-            </ThemeProvider>
+            <Provider theme={darkTheme} colorScheme={'dark'}>
+              <ThemeProvider>
+                <RouteBasedApplicationServiceProvider>
+                  <NotificationProvider>
+                    <QueryClientProvider client={queryClient}>
+                      <App />
+                    </QueryClientProvider>
+                  </NotificationProvider>
+                </RouteBasedApplicationServiceProvider>
+              </ThemeProvider>
+            </Provider>
           </Router>
         </StrictMode>
       </ErrorBoundary>
     </div>,
-    document.getElementById("root")
+    document.getElementById('root')
   )
 );
 
