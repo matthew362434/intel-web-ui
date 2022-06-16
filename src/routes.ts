@@ -17,8 +17,8 @@
 ##############################################################################
 */
 
-const HOME = "/";
-const PROJECTS = "/projects";
+const HOME = '/';
+const PROJECTS = '/projects';
 const PROJECT = `${PROJECTS}/:projectId`;
 
 const ROUTER_PATHS = {
