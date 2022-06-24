@@ -16,17 +16,22 @@
 #
 ##############################################################################
 */
-interface Dataset {
-  id: string;
-  name: string;
-}
+const HOME = '/';
+const PROJECTS = '/projects';
+const PROJECT = `${PROJECTS}/:projectId`;
 
-interface ProjectPropsCommon {
-  id: string;
-  name: string;
-  creationDate: Date;
-  thumbnail: string;
-}
+const ROUTER_PATHS = {
+  HOME,
+  LANDING_PAGE: HOME,
+  PROJECTS,
+  PROJECT,
+};
 
-export interface ProjectProps extends ProjectPropsCommon {}
-export type CreateProjectProps = Omit<ProjectProps, 'datasets'>;
+const getProjectUrl = (projectId: string): string =>
+  encodeURI(`${PROJECTS}/${projectId}`);
+
+const PATHS = {
+  getProjectUrl,
+};
+
+export { ROUTER_PATHS, PATHS };

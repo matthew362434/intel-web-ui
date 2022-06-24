@@ -17,8 +17,8 @@
 ##############################################################################
 */
 
-import React, { StrictMode } from 'react';
-import ReactDOM from 'react-dom';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ErrorBoundary } from './components/errors/error-boundary.component';
@@ -45,13 +45,16 @@ const queryClient = new QueryClient({
   },
 });
 
-importBuildTarget().then(({ default: App }) =>
-  // eslint-disable-next-line react/no-render-return-value
-  ReactDOM.render(
-    <div>
-      <GlobalStyles />
-      <ErrorBoundary>
-        <StrictMode>
+const container = document.getElementById('root');
+if (container) {
+  const root = createRoot(container);
+  importBuildTarget().then(({ default: App }) =>
+    // eslint-disable-next-line react/no-render-return-value
+    root.render(
+      <div>
+        <GlobalStyles />
+        <ErrorBoundary>
+          {/* <StrictMode> */}
           <Router>
             <Provider theme={darkTheme} colorScheme={'dark'}>
               <ThemeProvider>
@@ -65,11 +68,11 @@ importBuildTarget().then(({ default: App }) =>
               </ThemeProvider>
             </Provider>
           </Router>
-        </StrictMode>
-      </ErrorBoundary>
-    </div>,
-    document.getElementById('root')
-  )
-);
+          {/* </StrictMode> */}
+        </ErrorBoundary>
+      </div>
+    )
+  );
+}
 
 reportWebVitals();

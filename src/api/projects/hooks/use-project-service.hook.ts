@@ -1,5 +1,3 @@
-import { CELL_TYPES, MODEL_TYPES } from '../../../../api/projects';
-
 /*
 ##############################################################################
 #
@@ -18,17 +16,13 @@ import { CELL_TYPES, MODEL_TYPES } from '../../../../api/projects';
 #
 ##############################################################################
 */
-export interface NewProjectDialogContextProps {
-  save: () => void;
-  isLoading: boolean;
-  metadata: Project;
-  updateProjectState: (projectState: Partial<Project>) => void;
+import { useApplicationServices } from '../../../providers/application-provider/application-services-provider.component';
+import { ProjectService } from '../services';
+
+export interface UseProjectServiceInterface {
+  projectService: ProjectService;
 }
 
-interface SelectProjectTemplateProps {
-  projectName: string;
-  cellType: CELL_TYPES;
-  modelType: MODEL_TYPES;
-}
-
-export type Project = SelectProjectTemplateProps;
+export const useProjectService = (): UseProjectServiceInterface => {
+  return useApplicationServices();
+};

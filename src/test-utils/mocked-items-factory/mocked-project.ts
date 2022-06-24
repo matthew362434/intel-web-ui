@@ -1,5 +1,3 @@
-import { CELL_TYPES, MODEL_TYPES } from '../../../../api/projects';
-
 /*
 ##############################################################################
 #
@@ -18,17 +16,20 @@ import { CELL_TYPES, MODEL_TYPES } from '../../../../api/projects';
 #
 ##############################################################################
 */
-export interface NewProjectDialogContextProps {
-  save: () => void;
-  isLoading: boolean;
-  metadata: Project;
-  updateProjectState: (projectState: Partial<Project>) => void;
-}
+import { CELL_TYPES, MODEL_TYPES, ProjectProps } from '../../api/projects';
 
-interface SelectProjectTemplateProps {
-  projectName: string;
-  cellType: CELL_TYPES;
-  modelType: MODEL_TYPES;
-}
+const mockedProject: ProjectProps = {
+  projectID: '1234',
+  projectName: 'Test project 1',
+  cellType: CELL_TYPES.OFF_SMALL,
+  modelType: MODEL_TYPES.ALIGNED_FIRST,
+  createdAt: new Date(),
+};
 
-export type Project = SelectProjectTemplateProps;
+export const getMockedProject = (
+  customProjectValues: Partial<ProjectProps>
+): ProjectProps => {
+  return {
+    ...mockedProject,
+  };
+};

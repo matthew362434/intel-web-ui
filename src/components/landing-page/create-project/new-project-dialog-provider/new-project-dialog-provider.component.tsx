@@ -19,6 +19,10 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCreateProject } from '../../../../api/projects/hooks/use-create-project.hook';
+import {
+  CELL_TYPES,
+  MODEL_TYPES,
+} from '../../../../api/projects/project.interface';
 import { MissingProviderError } from '../../../../helpers/missing-provider-error';
 import { PATHS } from '../../../../routes';
 
@@ -39,7 +43,9 @@ export const NewProjectDialogProvider = ({
   children,
 }: NewProjectDialogProviderProps): JSX.Element => {
   const PROJECT_CREATION_INITIAL_STATE = {
-    name: '',
+    projectName: '',
+    cellType: CELL_TYPES.OFF_SMALL,
+    modelType: MODEL_TYPES.ALIGNED_FIRST,
   };
 
   const navigate = useNavigate();
@@ -53,13 +59,13 @@ export const NewProjectDialogProvider = ({
   };
 
   const save = async () => {
-    const { name } = projectCreationState;
+    const { projectName, cellType, modelType } = projectCreationState;
 
     createProject.mutate(
-      { name },
+      { projectName, cellType, modelType },
       {
         onSuccess: (response) => {
-          navigate(PATHS.getProjectUrl(response.name));
+          navigate(PATHS.getProjectUrl(response.projectID));
         },
       }
     );

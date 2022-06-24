@@ -1,5 +1,3 @@
-import { CELL_TYPES, MODEL_TYPES } from '../../../../api/projects';
-
 /*
 ##############################################################################
 #
@@ -18,17 +16,26 @@ import { CELL_TYPES, MODEL_TYPES } from '../../../../api/projects';
 #
 ##############################################################################
 */
-export interface NewProjectDialogContextProps {
-  save: () => void;
-  isLoading: boolean;
-  metadata: Project;
-  updateProjectState: (projectState: Partial<Project>) => void;
-}
+import {
+  CreateProjectProps,
+  ProjectIdentifier,
+  ProjectProps,
+  EditProjectProps,
+  CELL_TYPES,
+  MODEL_TYPES,
+} from '../../projects';
 
-interface SelectProjectTemplateProps {
-  projectName: string;
-  cellType: CELL_TYPES;
-  modelType: MODEL_TYPES;
+export interface ProjectService {
+  getProjects(workspaceId: string): Promise<ProjectProps[]>;
+  getProject(projectIdentifier: ProjectIdentifier): Promise<ProjectProps>;
+  editProject(
+    projectIdentifier: ProjectIdentifier,
+    body: EditProjectProps
+  ): Promise<ProjectProps>;
+  createProject(
+    projectName: string,
+    cellType: CELL_TYPES,
+    modelType: MODEL_TYPES
+  ): Promise<CreateProjectProps>;
+  deleteProject(projectIdentifier: ProjectIdentifier): Promise<string>;
 }
-
-export type Project = SelectProjectTemplateProps;

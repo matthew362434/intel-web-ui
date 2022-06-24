@@ -86,7 +86,7 @@ const App = (): JSX.Element => {
           </Routes>
         </DndProvider>
       </ApplicationProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </>
   );
 };

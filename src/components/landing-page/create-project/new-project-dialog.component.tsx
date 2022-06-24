@@ -16,6 +16,7 @@
 #
 ##############################################################################
 */
+
 import { Key, useCallback, useEffect, useState } from 'react';
 import {
   Button,
@@ -27,23 +28,22 @@ import {
   Text,
   Content,
   Heading,
+  ComboBox,
+  Item,
 } from '@adobe/react-spectrum';
 import { PressEvent } from '@react-types/shared';
 
 import { useNewProjectDialog } from './new-project-dialog-provider';
 import { LimitedTextField } from '../../shared/limited-text-field';
 import { ValidationErrorMsg } from '../../shared/validation-error-msg';
-import { TabItem, Tabs } from '../../shared/tabs';
-import {
-  ProjectNameErrorPath,
-  projectNameSchema,
-  TABS_SINGLE_TEMPLATE,
-} from './utils';
+import { ProjectNameErrorPath, projectNameSchema } from './utils';
 import { isYupValidationError } from '../../../helpers/utils';
 import { ValidationError } from 'yup';
 import { LoadingIndicator } from '../../shared';
+import { CELL_TYPES, MODEL_TYPES } from '../../../api/projects';
+import 'twin.macro';
 
-const DEFAULT_ERRORS = { name: '' };
+const DEFAULT_ERRORS = { projectName: '' };
 
 interface NewProjectDialogProps {
   buttonText: string;
@@ -56,11 +56,16 @@ export const NewProjectDialog = ({
   const {
     save,
     isLoading,
-    metadata: { name },
+    metadata: { projectName, cellType, modelType },
     updateProjectState,
   } = useNewProjectDialog();
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isValid, setValidity] = useState<boolean>(false);
+
+  const [_projectName, setProjectName] = useState<string>(projectName);
+  const [_cellType, setCellType] = useState<CELL_TYPES>(cellType);
+  const [_modelType, setModelType] = useState<MODEL_TYPES>(modelType);
 
   const handleOpenDialog = (): void => {
     setIsOpen(true);
@@ -78,32 +83,38 @@ export const NewProjectDialog = ({
     save();
   };
 
-  const [projectName, setProjectName] = useState<string>(name);
   const [errors, setErrors] =
     useState<{ [key in ProjectNameErrorPath]: string }>(DEFAULT_ERRORS);
 
-  const handleTabSelectionChange = (key: Key) => {
-    updateProjectState({});
+  const handleCellTypeChange = (key: Key) => {
+    setCellType(key as CELL_TYPES);
+    updateProjectState({ cellType: key as CELL_TYPES });
+  };
+
+  const handleModelTypeChange = (key: Key) => {
+    setModelType(key as MODEL_TYPES);
+    updateProjectState({ modelType: key as MODEL_TYPES });
   };
 
   const validateProjectName = useCallback(
     (inputProjectName: string): void => {
-      console.log(inputProjectName);
       try {
         const trimedName = inputProjectName.trim();
         const validated = projectNameSchema(trimedName, projects).validateSync(
-          { name: trimedName },
+          { projectName: trimedName },
           { abortEarly: false }
         );
-
-        updateProjectState({ name: validated.name });
+        updateProjectState({ projectName: validated.projectName });
         setErrors(DEFAULT_ERRORS);
         setValidity(true);
       } catch (error: unknown) {
         if (isYupValidationError(error)) {
           error.inner.forEach(({ path, message }: ValidationError) => {
-            if (path === ProjectNameErrorPath.NAME) {
-              setErrors((prevErrors) => ({ ...prevErrors, name: message }));
+            if (path === ProjectNameErrorPath.PROJECT_NAME) {
+              setErrors((prevErrors) => ({
+                ...prevErrors,
+                projectName: message,
+              }));
             }
           });
         }
@@ -120,25 +131,27 @@ export const NewProjectDialog = ({
   };
 
   useEffect(() => {
-    if (!projectName) {
+    if (!_projectName) {
       setValidity(false);
     }
-  }, [projectName, setValidity]);
+  }, [_projectName, setValidity]);
 
   useEffect(() => {
-    if (projectName) {
-      validateProjectName(projectName);
+    if (_projectName) {
+      validateProjectName(_projectName);
     }
-  }, [projectName, validateProjectName]);
+  }, []);
 
-  const ITEMS: TabItem[] = [
-    ...Object.entries(TABS_SINGLE_TEMPLATE).map(([tab, cards]) => ({
-      id: `${tab}-id`,
-      key: `${tab}`,
-      name: tab,
-      children: <div />,
-    })),
-  ];
+  const CELL_TYPE_OPTIONS: { name: CELL_TYPES }[] = Object.values(
+    CELL_TYPES
+  ).map((el) => ({
+    name: el,
+  }));
+  const MODEL_TYPE_OPTIONS: { name: MODEL_TYPES }[] = Object.values(
+    MODEL_TYPES
+  ).map((el) => ({
+    name: el,
+  }));
 
   return (
     <>
@@ -157,18 +170,37 @@ export const NewProjectDialog = ({
             <Heading id={'create-new-project-id'}>Create new project</Heading>
             <Divider />
             <Content>
-              <LimitedTextField
-                label="Project name"
-                value={projectName}
-                onChange={handleProjectNameChange}
-                placeholder={'Untitled'}
-                id={'project-name-input-id'}
-              />
-              <ValidationErrorMsg errorMsg={errors.name} />
-              <Tabs
-                onSelectionChange={handleTabSelectionChange}
-                items={ITEMS}
-              />
+              <div tw="flex">
+                <div tw="flex flex-col items-end mx-auto">
+                  <LimitedTextField
+                    label="Project name"
+                    value={_projectName}
+                    labelPosition={'side'}
+                    onChange={handleProjectNameChange}
+                    id={'project-name-input-id'}
+                  />
+                  <ValidationErrorMsg errorMsg={errors.projectName} />
+                  <ComboBox
+                    tw="mb-[20px] mt-2"
+                    label="Cell type"
+                    defaultItems={CELL_TYPE_OPTIONS}
+                    defaultInputValue={_cellType}
+                    labelPosition={'side'}
+                    onSelectionChange={handleCellTypeChange}
+                  >
+                    {(item) => <Item key={item.name}>{item.name}</Item>}
+                  </ComboBox>
+                  <ComboBox
+                    label="Model type"
+                    defaultItems={MODEL_TYPE_OPTIONS}
+                    defaultInputValue={_modelType}
+                    labelPosition={'side'}
+                    onSelectionChange={handleModelTypeChange}
+                  >
+                    {(item) => <Item key={item.name}>{item.name}</Item>}
+                  </ComboBox>
+                </div>
+              </div>
             </Content>
             <ButtonGroup>
               <Button

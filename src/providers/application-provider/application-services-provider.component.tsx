@@ -17,11 +17,17 @@
 ##############################################################################
 */
 
-import { createContext, ReactNode, useContext, useMemo } from "react";
-import { MissingProviderError } from "../../helpers/missing-provider-error";
+import { createContext, ReactNode, useContext, useMemo } from 'react';
+import {
+  createApiProjectService,
+  createInMemoryProjectService,
+  ProjectService,
+} from '../../api/projects/services';
+import { MissingProviderError } from '../../helpers/missing-provider-error';
 
 export interface ApplicationServicesContextProps {
   useInMemoryEnvironment: boolean;
+  projectService: ProjectService;
 }
 
 interface ApplicationServicesProviderProps
@@ -42,11 +48,13 @@ export const ApplicationServicesProvider = ({
   const services = useMemo((): ApplicationServicesContextProps => {
     if (useInMemoryEnvironment) {
       return {
+        projectService: createInMemoryProjectService(),
         useInMemoryEnvironment,
       };
     }
 
     return {
+      projectService: createApiProjectService(),
       useInMemoryEnvironment,
     };
   }, [useInMemoryEnvironment]);
@@ -66,8 +74,8 @@ export const useApplicationServices = (): ApplicationServicesContextProps => {
 
   if (context === undefined) {
     throw new MissingProviderError(
-      "useApplicationServices",
-      "ApplicationServiceProvider"
+      'useApplicationServices',
+      'ApplicationServiceProvider'
     );
   }
 

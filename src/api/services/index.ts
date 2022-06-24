@@ -1,5 +1,3 @@
-import { CELL_TYPES, MODEL_TYPES } from '../../../../api/projects';
-
 /*
 ##############################################################################
 #
@@ -18,17 +16,6 @@ import { CELL_TYPES, MODEL_TYPES } from '../../../../api/projects';
 #
 ##############################################################################
 */
-export interface NewProjectDialogContextProps {
-  save: () => void;
-  isLoading: boolean;
-  metadata: Project;
-  updateProjectState: (projectState: Partial<Project>) => void;
-}
 
-interface SelectProjectTemplateProps {
-  projectName: string;
-  cellType: CELL_TYPES;
-  modelType: MODEL_TYPES;
-}
-
-export type Project = SelectProjectTemplateProps;
+export * from './routes';
+export * from './urls';

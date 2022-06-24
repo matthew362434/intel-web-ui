@@ -1,5 +1,3 @@
-import { CELL_TYPES, MODEL_TYPES } from '../../../../api/projects';
-
 /*
 ##############################################################################
 #
@@ -18,17 +16,36 @@ import { CELL_TYPES, MODEL_TYPES } from '../../../../api/projects';
 #
 ##############################################################################
 */
-export interface NewProjectDialogContextProps {
-  save: () => void;
-  isLoading: boolean;
-  metadata: Project;
-  updateProjectState: (projectState: Partial<Project>) => void;
+
+import { ProjectCommon } from './dtos';
+
+export interface ProjectIdentifier {
+  projectId: string;
 }
 
-interface SelectProjectTemplateProps {
+interface ProjectPropsCommon {
+  projectID: string;
   projectName: string;
   cellType: CELL_TYPES;
   modelType: MODEL_TYPES;
+  createdAt: Date;
 }
 
-export type Project = SelectProjectTemplateProps;
+export interface ProjectProps extends ProjectPropsCommon {}
+export type CreateProjectProps = Omit<ProjectProps, ''>;
+
+export interface ProjectCreation extends ProjectCommon {}
+export interface EditProjectProps extends ProjectPropsCommon {}
+
+export enum CELL_TYPES {
+  OFF_SMALL = 'Off Small',
+  ON_SMALL = 'On Small',
+  OFF_LARGE = 'Off Large',
+  ON_LARGE = 'On Large',
+}
+
+export enum MODEL_TYPES {
+  ALIGNED_FIRST = 'Aligned First',
+  ALIGNED_LAST = 'Aligned Last',
+  ROLLING = 'Rolling',
+}

@@ -22,32 +22,39 @@ import {
   NOTIFICATION_TYPE,
   useNotification,
 } from '../../../components/shared/notification';
+import {
+  CELL_TYPES,
+  CreateProjectProps,
+  MODEL_TYPES,
+} from '../project.interface';
+import { useProjectService } from './use-project-service.hook';
 
 interface UseCreateProjectMutation {
-  name: string;
+  projectName: string;
+  cellType: CELL_TYPES;
+  modelType: MODEL_TYPES;
 }
 
 interface UseCreateProject {
   createProject: UseMutationResult<
-    UseCreateProjectMutation,
+    CreateProjectProps,
     AxiosError,
     UseCreateProjectMutation
   >;
 }
 
 export const useCreateProject = (): UseCreateProject => {
-  // const service = useProjectService().projectService;
+  const service = useProjectService().projectService;
   const { addNotification } = useNotification();
   const createProject = useMutation<
-    UseCreateProjectMutation,
+    CreateProjectProps,
     AxiosError,
     UseCreateProjectMutation
   >(
     async (args: UseCreateProjectMutation) => {
-      const { name } = args;
+      const { projectName, cellType, modelType } = args;
 
-      // return await service.createProject(name);
-      return { name };
+      return await service.createProject(projectName, cellType, modelType);
     },
     {
       onError: (error) => {
