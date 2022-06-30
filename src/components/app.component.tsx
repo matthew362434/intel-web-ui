@@ -17,20 +17,24 @@
 ##############################################################################
 */
 
-import { Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { setLogger } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Loading } from './shared';
 import { ROUTER_PATHS } from '../routes';
 import { useStorage } from '../hooks';
 import { ApplicationProvider } from '../providers';
 import { LandingPage } from './landing-page';
+
+const ProjectDetails = lazy(
+  () => import('./project-details/project-details.component')
+);
 
 interface ResponseError {
   message: string;
@@ -79,10 +83,18 @@ const App = (): JSX.Element => {
         <DndProvider backend={HTML5Backend}>
           <Routes>
             <Route
-              path={ROUTER_PATHS.PROJECT}
-              element={<Suspense fallback={<Loading />}></Suspense>}
+              path={ROUTER_PATHS.PROJECT + '/*'}
+              element={
+                <Suspense fallback={<Loading />}>
+                  <ProjectDetails />
+                </Suspense>
+              }
             />
             <Route path={ROUTER_PATHS.LANDING_PAGE} element={<LandingPage />} />
+            <Route
+              path="*"
+              element={<Navigate to={ROUTER_PATHS.LANDING_PAGE} replace />}
+            />
           </Routes>
         </DndProvider>
       </ApplicationProvider>

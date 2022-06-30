@@ -20,19 +20,31 @@
 const HOME = '/';
 const PROJECTS = '/projects';
 const PROJECT = `${PROJECTS}/:projectId`;
+const PROJECT_DATASET = `${PROJECT}/dataset`;
 
 const ROUTER_PATHS = {
   HOME,
   LANDING_PAGE: HOME,
   PROJECTS,
   PROJECT,
+  PROJECT_DATASET,
+  PROJECT_DATASET_VIDEOS: `${PROJECT_DATASET}/videos`,
+  PROJECT_DATASET_ACTIONS: `${PROJECT_DATASET}/actions`,
 };
 
 const getProjectUrl = (projectId: string): string =>
   encodeURI(`${PROJECTS}/${projectId}`);
 
+const getAnnotatorUrl = (projectId: string): string =>
+  encodeURI(`${PROJECTS}/${projectId}/annotator`);
+
+const getProjectDatasetUrl = (projectId: string, chapterKey: string): string =>
+  encodeURI(`${PROJECTS}/${projectId}/dataset/${chapterKey}`);
+
 const PATHS = {
   getProjectUrl,
+  getAnnotatorUrl,
+  getProjectDatasetUrl,
 };
 
 export { ROUTER_PATHS, PATHS };

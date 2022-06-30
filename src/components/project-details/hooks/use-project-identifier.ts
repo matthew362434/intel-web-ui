@@ -16,5 +16,15 @@
 #
 ##############################################################################
 */
+import { useMemo } from 'react';
 
-export * from './urls';
+import { useParams } from 'react-router-dom';
+import { ProjectIdentifier } from '../../../api/projects';
+
+export const useProjectIdentifier = (): ProjectIdentifier => {
+  const { projectId } = useParams<{ projectId: string }>();
+
+  return useMemo(() => {
+    return { projectId: projectId || '' };
+  }, [projectId]);
+};

@@ -16,5 +16,13 @@
 #
 ##############################################################################
 */
+export const idMatchingFormat = (text: string | number): string => {
+  if (typeof text === 'string') {
+    return text.split(' ').join('-').replace(',', '').toLowerCase();
+  }
+  return String(text);
+};
 
-export * from './urls';
+export const idToName = (id: string): string => {
+  return id.split('-').join(' ').split('_').join('-');
+};

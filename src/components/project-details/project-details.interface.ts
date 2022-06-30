@@ -16,5 +16,8 @@
 #
 ##############################################################################
 */
+export interface ProjectDetailsParams {
+  projectId: string;
+}
 
-export * from './urls';
+export interface ProjectDetailsProps {}

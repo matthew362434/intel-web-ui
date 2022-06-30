@@ -16,5 +16,4 @@
 #
 ##############################################################################
 */
-
-export * from './urls';
+export * from './project-provider/project-provider.component';

@@ -16,5 +16,18 @@
 #
 ##############################################################################
 */
+.header {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  align-self: center;
+  white-space: nowrap;
+  margin: 0;
+}
 
-export * from './urls';
+.headerBox:hover .editNameButton {
+  opacity: 1 !important;
+}
+
+.editNameButton {
+  opacity: 0 !important;
+}

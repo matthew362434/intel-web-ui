@@ -20,6 +20,23 @@
 import { createGlobalStyle } from 'styled-components';
 import tw, { GlobalStyles as BaseStyles } from 'twin.macro';
 
+import { defaultTheme } from '@adobe/react-spectrum';
+import { Theme } from '@react-types/provider';
+
+import dark from './canyon-dark.module.css';
+import light from './canyon-light.module.css';
+import global from './canyon.module.css';
+
+export const CanyonTheme: Theme = {
+  ...defaultTheme,
+  dark,
+  light,
+  global: {
+    ...defaultTheme.global,
+    ...global,
+  },
+};
+
 const CustomStyles = createGlobalStyle`
   html {
     scroll-behavior: smooth;
@@ -54,7 +71,7 @@ const CustomStyles = createGlobalStyle`
 
 const GlobalStyles = () => (
   <>
-    <BaseStyles />
+    {/* <BaseStyles /> */}
     <CustomStyles />
   </>
 );

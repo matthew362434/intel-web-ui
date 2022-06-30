@@ -26,7 +26,6 @@ import { NotificationProvider } from './components/shared/notification';
 import { RouteBasedApplicationServiceProvider } from './providers/application-provider/route-based-application-service-provider.component';
 import reportWebVitals from './report-web-vitals';
 import { ThemeProvider } from './theme/theme-provider.component';
-import { Provider, darkTheme } from '@adobe/react-spectrum';
 import GlobalStyles from './theme';
 import 'twin.macro';
 
@@ -56,17 +55,15 @@ if (container) {
         <ErrorBoundary>
           {/* <StrictMode> */}
           <Router>
-            <Provider theme={darkTheme} colorScheme={'dark'}>
-              <ThemeProvider>
-                <RouteBasedApplicationServiceProvider>
-                  <NotificationProvider>
-                    <QueryClientProvider client={queryClient}>
-                      <App />
-                    </QueryClientProvider>
-                  </NotificationProvider>
-                </RouteBasedApplicationServiceProvider>
-              </ThemeProvider>
-            </Provider>
+            <ThemeProvider>
+              <RouteBasedApplicationServiceProvider>
+                <NotificationProvider>
+                  <QueryClientProvider client={queryClient}>
+                    <App />
+                  </QueryClientProvider>
+                </NotificationProvider>
+              </RouteBasedApplicationServiceProvider>
+            </ThemeProvider>
           </Router>
           {/* </StrictMode> */}
         </ErrorBoundary>

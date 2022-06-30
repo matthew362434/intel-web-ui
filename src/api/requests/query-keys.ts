@@ -16,5 +16,16 @@
 #
 ##############################################################################
 */
+const PROJECTS_KEY = (): readonly [string] => ['projects'];
 
-export * from './urls';
+const PROJECT_KEY = (projectId: string): readonly [string, string] => [
+  ...PROJECTS_KEY(),
+  projectId,
+];
+
+const QUERY_KEYS = {
+  PROJECTS_KEY,
+  PROJECT_KEY,
+};
+
+export default QUERY_KEYS;

@@ -17,9 +17,10 @@
 ##############################################################################
 */
 import { Link } from 'react-router-dom';
-import tw from 'twin.macro';
 import { ROUTER_PATHS } from '../../../routes';
 import Logo from '../../../assets/brain.png';
+import { Flex, View, Image, Heading } from '@adobe/react-spectrum';
+import classes from './header.module.scss';
 
 export const LandingPageHeader = ({
   grayscale = false,
@@ -28,30 +29,61 @@ export const LandingPageHeader = ({
 }): JSX.Element => {
   return (
     <>
-      <div
-        css={[grayscale && tw``, !grayscale && tw`bg-[#0095ca]`, tw`h-[72px]`]}
+      <Flex
+        UNSAFE_className={
+          grayscale ? classes.gray200color : classes.energyBlueShade1Color
+        }
+        justifyContent={'space-between'}
+        height={'100%'}
+        alignItems={'center'}
+        data-testid={'application-header'}
       >
-        <div tw="h-full flex">
-          <div hidden={grayscale} tw="bg-[#00C7FD] w-[16px]" />
+        <Flex height={'100%'}>
+          <View
+            isHidden={grayscale}
+            minWidth={'size-200'}
+            UNSAFE_className={classes.energyBlueColor}
+          />
+
           <Link
             to={ROUTER_PATHS.LANDING_PAGE}
-            tw="flex items-center text-[#e3e3e5]"
+            className={classes.headerLogoLink}
           >
-            <div
-              tw="ml-[16px] pl-[16px] h-[20px] my-auto bg-cover bg-no-repeat bg-center"
-              css={{ backgroundImage: `url(${Logo})` }}
+            <Image
+              marginStart={'size-200'}
+              height={'size-250'}
+              marginY={'auto'}
+              id={'application-logo'}
+              src={Logo}
+              alt={'application logo'}
             />
 
-            <div tw="ml-[16px] my-auto text-xl font-semibold">Canyon</div>
+            <Heading
+              level={3}
+              marginStart={'size-200'}
+              marginY={'auto'}
+              id={'application-title'}
+            >
+              Sonoma Creek
+            </Heading>
           </Link>
-        </div>
-
-        {/* <HeaderActions grayscale={grayscale} /> */}
-      </div>
-      <div hidden={grayscale} tw="w-[16px] h-[16px] bg-[#0095ca] absolute" />
-      <div
-        hidden={grayscale}
-        tw="w-[8px] h-[8px] bg-[#0095ca] absolute ml-[16px] mt-[16px]"
+        </Flex>
+      </Flex>
+      <View
+        isHidden={grayscale}
+        height={'size-200'}
+        width={'size-200'}
+        UNSAFE_className={classes.energyBlueShade1Color}
+        position={'absolute'}
+      />
+      <View
+        isHidden={grayscale}
+        height={'size-100'}
+        width={'size-100'}
+        UNSAFE_className={classes.energyBlueShade1Color}
+        position={'absolute'}
+        marginStart={'size-200'}
+        marginTop={'size-200'}
       />
     </>
   );

@@ -16,5 +16,5 @@
 #
 ##############################################################################
 */
-
-export * from './urls';
+export * from './project-details.component';
+export * from './project-details.interface';

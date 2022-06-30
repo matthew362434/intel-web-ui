@@ -26,7 +26,7 @@ import 'twin.macro';
 export const LandingPage = (): JSX.Element => {
   return (
     <div tw="h-screen flex flex-col">
-      <div>
+      <div tw="h-[72px]">
         <Header />
       </div>
       <div tw="flex flex-1">

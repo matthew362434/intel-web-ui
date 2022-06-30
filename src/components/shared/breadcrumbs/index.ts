@@ -16,5 +16,5 @@
 #
 ##############################################################################
 */
-
-export * from './urls';
+export * from './breadcrumbs.component';
+export * from './breadcrumbs.interface';

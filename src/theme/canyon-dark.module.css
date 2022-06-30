@@ -1,0 +1,41 @@
+/*
+##############################################################################
+#
+# Copyright (C) 2022 Intel Corporation
+# 
+# This software and the related documents are Intel copyrighted materials,
+# and your use of them is governed by the express license under which they
+# were provided to you ("License"). Unless the License provides otherwise,
+# you may not use, modify, copy, publish, distribute, disclose or transmit
+# this software or the related documents without Intel's prior written
+# permission.
+#
+# This software and the related documents are provided as is, with no
+# express or implied warranties, other than those that are expressly stated
+# in the License.
+#
+##############################################################################
+*/
+.spectrum--canyon {
+  --spectrum-global-color-gray-50: #242528;
+  --spectrum-global-color-gray-75: #2e2f32;
+  --spectrum-global-color-gray-100: #313236;
+  --spectrum-global-color-gray-200: #3c3e42;
+  --spectrum-global-color-gray-300: #484a50;
+  --spectrum-global-color-gray-400: #585a62;
+  --spectrum-global-color-gray-500: #6b6e76;
+  --spectrum-global-color-gray-600: #8e9099;
+  --spectrum-global-color-gray-700: #b7b9be;
+  --spectrum-global-color-gray-800: #e3e3e5;
+  --spectrum-global-color-gray-900: #ffffff;
+  --spectrum-well-background-color: var(--spectrum-global-color-gray-100);
+  --spectrum-alias-background-color-modal-overlay: rgba(0, 0, 0, 0.5);
+  --spectrum-semantic-negative-color-text-small: var(--brand-coral-cobalt);
+  --spectrum-toast-negative-background-color: var(--brand-coral-coral-shade1);
+  --spectrum-toast-neutral-background-color: var(
+    --spectrum-global-color-gray-400
+  );
+  --spectrum-toast-neutral-padding-y: var(--spectrum-global-dimension-size-75);
+  --spectrum-toast-info-background-color: var(--energy-blue-dark);
+  --spectrum-toast-warning-background-color: var(--brand-daisy);
+}

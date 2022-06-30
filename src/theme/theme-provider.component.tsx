@@ -17,13 +17,19 @@
 ##############################################################################
 */
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
+import { Provider, darkTheme } from '@adobe/react-spectrum';
 
-const getInitialTheme = () => {
+import '../assets/index.scss';
+import { CanyonTheme } from './index';
+
+type ColorScheme = 'light' | 'dark';
+
+const getInitialTheme = (): ColorScheme => {
   if (typeof window !== 'undefined' && window.localStorage) {
     const storedPrefs = window.localStorage.getItem('color-theme');
     if (typeof storedPrefs === 'string') {
-      return storedPrefs;
+      return storedPrefs as ColorScheme;
     }
 
     const userMedia = window.matchMedia('(prefers-color-scheme: dark)');
@@ -36,8 +42,8 @@ const getInitialTheme = () => {
 };
 
 export interface ThemeContextProps {
-  theme: string;
-  setTheme(theme: string): void;
+  theme: ColorScheme;
+  setTheme(theme: ColorScheme): void;
 }
 
 export interface ThemeProviderProps {
@@ -49,26 +55,32 @@ const ThemeContext = React.createContext<ThemeContextProps | undefined>(
 );
 
 const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  const [theme, setTheme] = React.useState<string>(getInitialTheme);
+  const [theme, setTheme] = useState<ColorScheme>(getInitialTheme);
 
   const rawSetTheme = (_theme: string) => {
     const root = window.document.documentElement;
     const isDark = _theme === 'dark';
 
+    root.classList.add('spectrum');
+    root.classList.add('spectrum--medium');
     root.classList.remove(isDark ? 'light' : 'dark');
     root.classList.add(_theme);
+    root.classList.remove(isDark ? 'spectrum--light' : 'spectrum--dark');
+    root.classList.add('spectrum--' + _theme);
 
     localStorage.setItem('color-theme', _theme);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     rawSetTheme(theme);
   }, [theme]);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      {children}
-    </ThemeContext.Provider>
+    <Provider theme={CanyonTheme} colorScheme={theme}>
+      <ThemeContext.Provider value={{ theme, setTheme }}>
+        {children}
+      </ThemeContext.Provider>
+    </Provider>
   );
 };
 

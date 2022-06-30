@@ -16,5 +16,17 @@
 #
 ##############################################################################
 */
+export enum KeyboardEvents {
+  KeyDown = 'keydown',
+  KeyUp = 'keyup',
+}
 
-export * from './urls';
+export enum KeyMap {
+  Delete = 'Delete',
+  Enter = 'Enter',
+  Esc = 'Escape',
+  Z = 'Z',
+  z = 'z',
+  Shift = 'Shift',
+  Backspace = 'Backspace',
+}

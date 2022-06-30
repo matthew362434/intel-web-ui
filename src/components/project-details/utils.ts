@@ -16,22 +16,11 @@
 #
 ##############################################################################
 */
-const HOME = '/';
-const PROJECTS = '/projects';
-const PROJECT = `${PROJECTS}/:projectId`;
-
-const ROUTER_PATHS = {
-  HOME,
-  LANDING_PAGE: HOME,
-  PROJECTS,
-  PROJECT,
+export const getModelsTaskChainLocation = (pathname: string): string => {
+  if (pathname.includes('models/all')) {
+    return pathname;
+  }
+  const isBackslashLastCharacter = pathname[pathname.length - 1] === '/';
+  const taskName = isBackslashLastCharacter ? 'all' : '/all';
+  return pathname + taskName;
 };
-
-const getProjectUrl = (projectId: string): string =>
-  encodeURI(`${PROJECTS}/${projectId}`);
-
-const PATHS = {
-  getProjectUrl,
-};
-
-export { ROUTER_PATHS, PATHS };
