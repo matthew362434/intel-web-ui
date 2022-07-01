@@ -17,4 +17,4 @@
 ##############################################################################
 */
 
-export * from "./application-provider/application-provider.component";
+export * from './application-provider/application-provider.component';

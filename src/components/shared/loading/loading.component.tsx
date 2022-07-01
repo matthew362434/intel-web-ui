@@ -17,7 +17,7 @@
 ##############################################################################
 */
 
-import { LoadingIndicator } from "./loading-indicator.component";
+import { LoadingIndicator } from './loading-indicator.component';
 
 interface LoadingProps extends Partial<any> {
   overlay?: boolean;

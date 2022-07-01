@@ -17,13 +17,21 @@
 ##############################################################################
 */
 
-import { useApplicationServices } from '../../../providers/application-provider/application-services-provider.component';
-import { ProjectService } from '../services';
+import { Project } from '../project';
+import { ProjectProps } from '../../../../api/projects/project.interface';
 
-export interface UseProjectServiceInterface {
-    projectService: ProjectService;
+interface ProjectsListProps {
+    projects: ProjectProps[];
 }
 
-export const useProjectService = (): UseProjectServiceInterface => {
-    return useApplicationServices();
+export const ProjectsList = ({ projects }: ProjectsListProps): JSX.Element => {
+    return (
+        <>
+            {
+                projects.map((project: ProjectProps) => (
+                    <Project key={project.projectID} project={project} />
+                ))
+            }
+        </>
+    );
 };

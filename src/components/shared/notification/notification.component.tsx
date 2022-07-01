@@ -23,17 +23,17 @@ import {
   useContext,
   useEffect,
   useRef,
-} from "react";
+} from 'react';
 
 import {
   ReactNotifications,
   iNotificationDismiss,
   Store,
-} from "react-notifications-component";
-import { useLocation } from "react-router-dom";
-import { MissingProviderError } from "../../../helpers/missing-provider-error";
+} from 'react-notifications-component';
+import { useLocation } from 'react-router-dom';
+import { MissingProviderError } from '../../../helpers/missing-provider-error';
 
-import { NOTIFICATION_TYPE, NotificationToast } from "./notification-toast";
+import { NOTIFICATION_TYPE, NotificationToast } from './notification-toast';
 
 interface NotificationContextProps {
   addNotification: (

@@ -16,14 +16,22 @@
 #
 ##############################################################################
 */
+const HOME = '/';
+const PROJECTS = '/projects';
+const PROJECT = `${PROJECTS}/:projectId`;
 
-import { useApplicationServices } from '../../../providers/application-provider/application-services-provider.component';
-import { ProjectService } from '../services';
-
-export interface UseProjectServiceInterface {
-    projectService: ProjectService;
-}
-
-export const useProjectService = (): UseProjectServiceInterface => {
-    return useApplicationServices();
+const ROUTER_PATHS = {
+  HOME,
+  LANDING_PAGE: HOME,
+  PROJECTS,
+  PROJECT,
 };
+
+const getProjectUrl = (projectId: string): string =>
+  encodeURI(`${PROJECTS}/${projectId}`);
+
+const PATHS = {
+  getProjectUrl,
+};
+
+export { ROUTER_PATHS, PATHS };

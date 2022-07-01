@@ -17,10 +17,11 @@
 ##############################################################################
 */
 
-import { createContext, ReactNode, useContext } from "react";
-import { MissingProviderError } from "../../helpers/missing-provider-error";
+import { createContext, ReactNode, useContext } from 'react';
+import { MissingProviderError } from '../../helpers/missing-provider-error';
 
-interface ApplicationContextProps {}
+interface ApplicationContextProps {
+}
 
 interface ApplicationProviderProps {
   children: ReactNode;
@@ -30,16 +31,10 @@ const ApplicationContext = createContext<ApplicationContextProps | undefined>(
   undefined
 );
 
-export const ApplicationProvider = ({
-  children,
-}: ApplicationProviderProps): JSX.Element => {
+export const ApplicationProvider = ({ children }: ApplicationProviderProps): JSX.Element => {
   const value: ApplicationContextProps = {};
 
-  return (
-    <ApplicationContext.Provider value={value}>
-      {children}
-    </ApplicationContext.Provider>
-  );
+  return <ApplicationContext.Provider value={value}>{children}</ApplicationContext.Provider>;
 };
 
 export const useApplicationContext = (): ApplicationContextProps => {

@@ -17,4 +17,5 @@
 ##############################################################################
 */
 
-export * from "./loading";
+export * from './loading';
+export * from './not-found';

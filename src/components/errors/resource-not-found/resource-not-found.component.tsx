@@ -17,7 +17,7 @@
 ##############################################################################
 */
 
-import { ErrorLayout } from "../error-layout";
+import { ErrorLayout } from '../error-layout';
 
 export const Notfound = (): JSX.Element => {
   const handleOnPress = (): void => {

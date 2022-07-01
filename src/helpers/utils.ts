@@ -139,6 +139,8 @@ export const newPasswordErrorMessage =
 export const confirmPasswordErrorMessage =
   'The password you entered did not match.';
 
+export const formattingDate = (date: Date, format: string): string => dayjs(date).format(format);
+
 export const formatDate = (date: string, format: string): string =>
   dayjs(date).format(format);
 

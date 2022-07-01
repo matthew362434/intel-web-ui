@@ -17,7 +17,7 @@
 ##############################################################################
 */
 
-import { ErrorLayout } from "../error-layout";
+import { ErrorLayout } from '../error-layout';
 
 export const ServiceUnavailable = (): JSX.Element => {
   const handleOnPress = (): void => {

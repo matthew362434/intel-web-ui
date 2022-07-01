@@ -17,11 +17,9 @@
 ##############################################################################
 */
 
-import { ReactNode } from "react";
-
-import { useLocation } from "react-router-dom";
-
-import { ApplicationServicesProvider } from "./application-services-provider.component";
+import { ReactNode } from 'react';
+import { useLocation } from 'react-router-dom';
+import { ApplicationServicesProvider } from './application-services-provider.component';
 
 interface RouteBasedApplicationServiceProviderProps {
   children: ReactNode;

@@ -17,8 +17,8 @@
 ##############################################################################
 */
 
-import { Alert, Info } from "../../../../assets/icons";
-import { NOTIFICATION_TYPE } from "./";
+import { Alert, Info } from '../../../../assets/icons';
+import { NOTIFICATION_TYPE } from './';
 
 export const getTypeToastClass = (
   type: NOTIFICATION_TYPE,

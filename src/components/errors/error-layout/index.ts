@@ -17,4 +17,4 @@
 ##############################################################################
 */
 
-export * from "./error-layout.component";
+export * from './error-layout.component';

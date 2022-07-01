@@ -17,9 +17,9 @@
 ##############################################################################
 */
 
-import { CloseSmall } from "../../../../assets/icons";
-import { NOTIFICATION_TYPE } from "./notification-type.enum";
-import { getIcon } from "./utils";
+import { CloseSmall } from '../../../../assets/icons';
+import { NOTIFICATION_TYPE } from './notification-type.enum';
+import { getIcon } from './utils';
 
 interface NotificationToastProps {
   message: string;

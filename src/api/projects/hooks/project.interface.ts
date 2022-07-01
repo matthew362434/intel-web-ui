@@ -16,14 +16,17 @@
 #
 ##############################################################################
 */
-
-import { useApplicationServices } from '../../../providers/application-provider/application-services-provider.component';
-import { ProjectService } from '../services';
-
-export interface UseProjectServiceInterface {
-    projectService: ProjectService;
+interface Dataset {
+  id: string;
+  name: string;
 }
 
-export const useProjectService = (): UseProjectServiceInterface => {
-    return useApplicationServices();
-};
+interface ProjectPropsCommon {
+  id: string;
+  name: string;
+  creationDate: Date;
+  thumbnail: string;
+}
+
+export interface ProjectProps extends ProjectPropsCommon {}
+export type CreateProjectProps = Omit<ProjectProps, 'datasets'>;

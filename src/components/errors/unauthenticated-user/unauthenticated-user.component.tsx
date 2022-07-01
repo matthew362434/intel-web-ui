@@ -17,8 +17,8 @@
 ##############################################################################
 */
 
-import { ROUTER_PATHS } from "../../../routes";
-import { ErrorLayout } from "../error-layout";
+import { ROUTER_PATHS } from '../../../routes';
+import { ErrorLayout } from '../error-layout';
 
 export const UnauthenticatedUser = (): JSX.Element => {
   const handleOnPress = (): void => {

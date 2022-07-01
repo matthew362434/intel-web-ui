@@ -18,12 +18,29 @@
 */
 import 'twin.macro';
 import { NewProjectDialog, NewProjectDialogProvider } from '../create-project';
+import { ProjectsList, useProjectsList } from './projects-list';
+import { useState } from 'react';
+import { ProjectProps } from '../../../api/projects/project.interface';
+import { ProjectSorting } from './project-sorting/project-sorting.component';
+import { ListSearchField } from '../../shared/list-search-field';
 
 export const LandingContent = (): JSX.Element => {
+  const { projects, isLoading } = useProjectsList();
+  const [filteredProjects, setFilteredProjects] = useState<ProjectProps[]>(projects || []);
+
   const projectActions = (
     <div tw="my-auto flex gap-[12px] justify-end">
-      <div>{/* Search component */}</div>
-      <div>{/* Filter component */}</div>
+      <div tw="flex">
+        <ListSearchField<ProjectProps, 'projectName'>
+          list={projects}
+          setFilteredList={setFilteredProjects}
+          attribute='projectName'
+          placeholder='Search by name'
+        />
+      </div>
+      <div tw="flex">
+        <ProjectSorting projects={filteredProjects} setSortedProjects={setFilteredProjects} />
+      </div>
       <div>{/* Import button component */}</div>
       <NewProjectDialogProvider>
         <NewProjectDialog buttonText={'Create new project'} />
@@ -33,8 +50,11 @@ export const LandingContent = (): JSX.Element => {
 
   return (
     <>
-      <div tw="flex justify-end mt-[16px]">{projectActions}</div>
-      <div>{/* Project List Component */}</div>
+      <div tw="flex justify-end mt-[16px] mb-2">{projectActions}</div>
+      {!filteredProjects || !filteredProjects.length ? (
+        <>No Projects</>
+      ) : <ProjectsList projects={filteredProjects} />
+      }
     </>
   );
 };

@@ -17,13 +17,4 @@
 ##############################################################################
 */
 
-import { useApplicationServices } from '../../../providers/application-provider/application-services-provider.component';
-import { ProjectService } from '../services';
-
-export interface UseProjectServiceInterface {
-    projectService: ProjectService;
-}
-
-export const useProjectService = (): UseProjectServiceInterface => {
-    return useApplicationServices();
-};
+export * from './not-found.component';

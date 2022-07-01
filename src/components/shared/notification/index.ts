@@ -17,5 +17,5 @@
 ##############################################################################
 */
 
-export * from "./notification.component";
-export * from "./notification-toast";
+export * from './notification.component';
+export * from './notification-toast';

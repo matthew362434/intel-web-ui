@@ -17,13 +17,13 @@
 ##############################################################################
 */
 
-import { useApplicationServices } from '../../../providers/application-provider/application-services-provider.component';
-import { ProjectService } from '../services';
+import { Content, Heading, IllustratedMessage } from '@adobe/react-spectrum';
+import NotFoundSpectrum from '@spectrum-icons/illustrations/NotFound';
 
-export interface UseProjectServiceInterface {
-    projectService: ProjectService;
-}
-
-export const useProjectService = (): UseProjectServiceInterface => {
-    return useApplicationServices();
-};
+export const NotFound = (): JSX.Element => (
+    <IllustratedMessage>
+        <NotFoundSpectrum />
+        <Heading>No results</Heading>
+        <Content>Try another search</Content>
+    </IllustratedMessage>
+);

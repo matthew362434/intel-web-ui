@@ -22,6 +22,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { ROUTER_PATHS } from '../../routes';
 import { LandingContent } from './landing-page-content';
 import 'twin.macro';
+import { ProjectsListProvider } from './landing-page-content/projects-list';
 
 export const LandingPage = (): JSX.Element => {
   return (
@@ -39,7 +40,9 @@ export const LandingPage = (): JSX.Element => {
                 element={
                   <ErrorBoundary>
                     <div>
-                      <LandingContent />
+                      <ProjectsListProvider>
+                        <LandingContent />
+                      </ProjectsListProvider>
                     </div>
                   </ErrorBoundary>
                 }

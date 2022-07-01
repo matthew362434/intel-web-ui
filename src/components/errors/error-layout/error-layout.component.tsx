@@ -17,7 +17,7 @@
 ##############################################################################
 */
 
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 interface ErrorLayoutProps {
   children: ReactNode;

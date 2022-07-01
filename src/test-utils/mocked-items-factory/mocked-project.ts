@@ -31,5 +31,6 @@ export const getMockedProject = (
 ): ProjectProps => {
   return {
     ...mockedProject,
+    ...customProjectValues
   };
 };

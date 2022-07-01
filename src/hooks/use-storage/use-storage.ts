@@ -17,12 +17,12 @@
 ##############################################################################
 */
 
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-import { StatusCodes } from "http-status-codes";
-import { useErrorHandler } from "react-error-boundary";
-import { LOCAL_STORAGE_KEYS } from "../../helpers/local-storage-keys";
-import { removeLocalStorageKey } from "../../helpers/utils";
+import { StatusCodes } from 'http-status-codes';
+import { useErrorHandler } from 'react-error-boundary';
+import { LOCAL_STORAGE_KEYS } from '../../helpers/local-storage-keys';
+import { removeLocalStorageKey } from '../../helpers/utils';
 
 export const useStorage = (): void => {
   const errorHandler = useErrorHandler();
