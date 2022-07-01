@@ -64,7 +64,7 @@ export const LandingPageHeader = ({
               marginY={'auto'}
               id={'application-title'}
             >
-              Sonoma Creek
+              Canyon
             </Heading>
           </Link>
         </Flex>
